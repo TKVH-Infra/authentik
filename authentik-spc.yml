@@ -1,0 +1,52 @@
+apiVersion: secrets-store.csi.x-k8s.io/v1alpha1
+kind: SecretProviderClass
+metadata:
+  name: authentik
+spec:
+  provider: vault
+  secretObjects:
+  - secretName: authentik
+    type: Opaque
+    data: 
+    - objectName: POSTGRES_DB
+      key: POSTGRES_DB
+    - objectName: POSTGRES_PASSWORD
+      key: POSTGRES_PASSWORD
+    - objectName: POSTGRES_USER
+      key: POSTGRES_USER
+    - objectName: AUTHENTIK_SECRET_KEY
+      key: AUTHENTIK_SECRET_KEY
+
+    - objectName: AUTHENTIK_EMAIL__HOST
+      key: AUTHENTIK_EMAIL__HOST
+    - objectName: AUTHENTIK_EMAIL__PASSWORD
+      key: AUTHENTIK_EMAIL__PASSWORD
+    - objectName: AUTHENTIK_EMAIL__USERNAME
+      key: AUTHENTIK_EMAIL__USERNAME
+  parameters:
+    vaultAddress: 'http://vault.vault:8200'
+    vaultKubernetesMountPath: 'k8s-vault-csi'
+    roleName: authentik
+    objects: |
+      - objectName: "POSTGRES_DB"
+        secretPath: "apps-kv/data/authentik/database"
+        secretKey: "POSTGRES_DB"
+      - objectName: "POSTGRES_PASSWORD"
+        secretPath: "apps-kv/data/authentik/database"
+        secretKey: "POSTGRES_PASSWORD"
+      - objectName: "POSTGRES_USER"
+        secretPath: "apps-kv/data/authentik/database"
+        secretKey: "POSTGRES_USER"
+      - objectName: "AUTHENTIK_SECRET_KEY"
+        secretPath: "apps-kv/data/authentik/config"
+        secretKey: "AUTHENTIK_SECRET_KEY"
+
+      - objectName: "AUTHENTIK_EMAIL__HOST"
+        secretPath: "apps-kv/data/authentik/smtp"
+        secretKey: "AUTHENTIK_EMAIL__HOST"
+      - objectName: "AUTHENTIK_EMAIL__PASSWORD"
+        secretPath: "apps-kv/data/authentik/smtp"
+        secretKey: "AUTHENTIK_EMAIL__PASSWORD"
+      - objectName: "AUTHENTIK_EMAIL__USERNAME"
+        secretPath: "apps-kv/data/authentik/smtp"
+        secretKey: "AUTHENTIK_EMAIL__USERNAME"

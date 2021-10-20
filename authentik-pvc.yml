@@ -1,0 +1,28 @@
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: authentik-psql
+  annotations:
+    nfs.io/storage-path: "data01/authentik/db"
+spec:
+  storageClassName: managed-nfs-storage
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: redis-data
+  annotations:
+    nfs.io/storage-path: "data01/authentik/redis"
+spec:
+  storageClassName: managed-nfs-storage
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi

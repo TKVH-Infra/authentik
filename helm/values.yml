@@ -1,0 +1,18 @@
+authentik:
+  secret_key: "tata"
+  error_reporting:
+    enabled: false
+  postgresql:
+    host: "host"
+    port: 5432
+    name: "name"
+    user: "user"
+    password: "pwdpsql"
+geoip:
+  enabled: false
+ingress:
+  enabled: false
+postgresql:
+  enabled: false
+redis:
+  enabled: true

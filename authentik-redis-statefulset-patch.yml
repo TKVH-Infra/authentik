@@ -1,0 +1,21 @@
+---
+# Source: authentik/charts/redis/templates/master/statefulset.yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: authentik-redis-master
+  namespace: "authentik"
+spec:
+  template:
+    spec:
+      volumes:
+      - name: redis-data
+        persistentVolumeClaim:
+          claimName: redis-data
+      containers:
+       - name: redis
+         resources:
+           limits:
+             memory: 512Mi
+           requests:
+             memory: 256Mi

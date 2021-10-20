@@ -1,0 +1,33 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: authentik
+resources:
+  - authentik-install.yml
+  - authentik-spc.yml
+  - authentik-pvc.yml
+  - psql-deploy.yml
+  - psql-svc.yml
+  - authentik-ing.yml
+patches:
+  - authentik-worker-deploy-patch.yml
+  - authentik-server-deploy-patch.yml
+  - authentik-redis-statefulset-patch.yml
+patchesJson6902:
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+      name: authentik-worker
+    path: authentik-worker-deploy-patchjson.yml
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+      name: authentik-server
+    path: authentik-server-deploy-patchjson.yml
+  - target:
+      group: apps
+      version: v1
+      kind: StatefulSet
+      name: authentik-redis-master
+    path: authentik-redis-statefulset-patchjson.yml

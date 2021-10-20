@@ -1,0 +1,101 @@
+---
+# Source: authentik/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: authentik-worker
+spec:
+  template:
+    spec:
+      containers:
+        - name: authentik
+          env:
+            - name: AUTHENTIK_AVATARS
+              value: gravatar
+            - name: AUTHENTIK_EMAIL__PORT
+              value: "587"
+            - name: AUTHENTIK_EMAIL__TIMEOUT
+              value: "30"
+            - name: AUTHENTIK_EMAIL__USE_SSL
+              value: "false"
+            - name: AUTHENTIK_EMAIL__USE_TLS
+              value: "true"
+            - name: AUTHENTIK_ERROR_REPORTING__ENABLED
+              value: "false"
+            - name: AUTHENTIK_ERROR_REPORTING__ENVIRONMENT
+              value: k8s
+            - name: AUTHENTIK_ERROR_REPORTING__SEND_PII
+              value: "false"
+            - name: AUTHENTIK_GEOIP
+              value: /geoip/GeoLite2-City.mmdb
+            - name: AUTHENTIK_LOG_LEVEL
+              value: info
+            - name: AUTHENTIK_OUTPOSTS__DOCKER_IMAGE_BASE
+              value: goauthentik.io/%(type)s:%(version)s
+            - name: AUTHENTIK_POSTGRESQL__HOST
+              value: psql
+            - name: AUTHENTIK_POSTGRESQL__NAME
+              valueFrom:
+                secretKeyRef:
+                  name: authentik
+                  key: POSTGRES_DB
+            - name: AUTHENTIK_POSTGRESQL__PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: authentik
+                  key: POSTGRES_PASSWORD
+            - name: AUTHENTIK_POSTGRESQL__PORT
+              value: "5432"
+            - name: AUTHENTIK_POSTGRESQL__S3_BACKUP__INSECURE_SKIP_VERIFY
+              value: "false"
+            - name: AUTHENTIK_POSTGRESQL__USER
+              valueFrom:
+                secretKeyRef:
+                  name: authentik
+                  key: POSTGRES_USER
+            - name: AUTHENTIK_REDIS__HOST
+              value: authentik-redis-master
+            - name: AUTHENTIK_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: authentik
+                  key: AUTHENTIK_SECRET_KEY
+            - name: AUTHENTIK_EMAIL__HOST
+              valueFrom:
+                secretKeyRef:
+                  name: authentik
+                  key: AUTHENTIK_EMAIL__HOST
+            - name: AUTHENTIK_EMAIL__USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: authentik
+                  key: AUTHENTIK_EMAIL__USERNAME
+            - name: AUTHENTIK_EMAIL__PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: authentik
+                  key: AUTHENTIK_EMAIL__PASSWORD
+            - name: AUTHENTIK_EMAIL__FROM
+              valueFrom:
+                secretKeyRef:
+                  name: authentik
+                  key: AUTHENTIK_EMAIL__USERNAME
+          resources:
+            limits:
+              memory: 512Mi
+            requests:
+              memory: 256Mi
+          volumeMounts:
+            - name: authentik-secrets
+              mountPath: "/mnt/vault"
+              readOnly: true
+      volumes:
+      - name: authentik-psql
+        persistentVolumeClaim:
+          claimName: authentik-psql
+      - name: authentik-secrets
+        csi:
+          driver: "secrets-store.csi.k8s.io"
+          readOnly: true
+          volumeAttributes:
+            secretProviderClass: "authentik"
