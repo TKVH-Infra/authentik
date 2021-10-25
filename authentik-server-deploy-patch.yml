@@ -86,7 +86,7 @@ spec:
               readOnly: true
           resources:
             limits:
-              memory: 512Mi
+              memory: 1024Mi
             requests:
               memory: 256Mi
       volumes:

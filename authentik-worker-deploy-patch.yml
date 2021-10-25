@@ -82,7 +82,7 @@ spec:
                   key: AUTHENTIK_EMAIL__USERNAME
           resources:
             limits:
-              memory: 512Mi
+              memory: 1024Mi
             requests:
               memory: 256Mi
           volumeMounts:
