@@ -82,9 +82,9 @@ spec:
                   key: AUTHENTIK_EMAIL__USERNAME
           resources:
             limits:
-              memory: 1024Mi
-            requests:
               memory: 256Mi
+            requests:
+              memory: 64Mi
           volumeMounts:
             - name: authentik-secrets
               mountPath: "/mnt/vault"
