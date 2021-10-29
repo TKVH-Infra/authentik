@@ -55,8 +55,6 @@ spec:
                   key: POSTGRES_USER
             - name: AUTHENTIK_REDIS__HOST
               value: authentik-redis-master
-            - name: AUTHENTIK_REDIS__CACHE_DB
-              value: "2Gi"
             - name: AUTHENTIK_SECRET_KEY
               valueFrom:
                 secretKeyRef:
@@ -82,6 +80,8 @@ spec:
                 secretKeyRef:
                   name: authentik
                   key: AUTHENTIK_EMAIL__USERNAME
+            - name: AUTHENTIK_REDIS__CACHE_DB
+              value: "2Gi"
           volumeMounts:
             - name: authentik-secrets
               mountPath: "/mnt/vault"
