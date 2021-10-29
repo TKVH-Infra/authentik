@@ -55,6 +55,8 @@ spec:
                   key: POSTGRES_USER
             - name: AUTHENTIK_REDIS__HOST
               value: authentik-redis-master
+            - name: AUTHENTIK_REDIS__CACHE_DB
+              value: "2Gi"
             - name: AUTHENTIK_SECRET_KEY
               valueFrom:
                 secretKeyRef:
