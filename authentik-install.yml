@@ -303,10 +303,10 @@ kind: Service
 metadata:
   name: authentik
   labels:
-    helm.sh/chart: authentik-3.2.0
+    helm.sh/chart: authentik-4.0.0
     app.kubernetes.io/name: authentik
     app.kubernetes.io/instance: authentik
-    app.kubernetes.io/version: "2021.9.8"
+    app.kubernetes.io/version: "2021.10.1"
     app.kubernetes.io/managed-by: Helm
 spec:
   type: ClusterIP
@@ -330,10 +330,10 @@ kind: Deployment
 metadata:
   name: authentik-server
   labels:
-    helm.sh/chart: authentik-3.2.0
+    helm.sh/chart: authentik-4.0.0
     app.kubernetes.io/name: authentik
     app.kubernetes.io/instance: authentik
-    app.kubernetes.io/version: "2021.9.8"
+    app.kubernetes.io/version: "2021.10.1"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: "server"
 spec:
@@ -354,7 +354,7 @@ spec:
       enableServiceLinks: true
       containers:
         - name: authentik
-          image: "goauthentik.io/server:2021.9.8"
+          image: "goauthentik.io/server:2021.10.1"
           imagePullPolicy: "IfNotPresent"
           args: ["server"]
           env:            
@@ -378,7 +378,7 @@ spec:
               value: /geoip/GeoLite2-City.mmdb
             - name: AUTHENTIK_LOG_LEVEL
               value: info
-            - name: AUTHENTIK_OUTPOSTS__DOCKER_IMAGE_BASE
+            - name: AUTHENTIK_OUTPOSTS__CONTAINER_IMAGE_BASE
               value: goauthentik.io/%(type)s:%(version)s
             - name: AUTHENTIK_POSTGRESQL__HOST
               value: host
@@ -431,10 +431,10 @@ kind: Deployment
 metadata:
   name: authentik-worker
   labels:
-    helm.sh/chart: authentik-3.2.0
+    helm.sh/chart: authentik-4.0.0
     app.kubernetes.io/name: authentik
     app.kubernetes.io/instance: authentik
-    app.kubernetes.io/version: "2021.9.8"
+    app.kubernetes.io/version: "2021.10.1"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: "worker"
 spec:
@@ -455,7 +455,7 @@ spec:
       enableServiceLinks: true
       containers:
         - name: authentik
-          image: "goauthentik.io/server:2021.9.8"
+          image: "goauthentik.io/server:2021.10.1"
           imagePullPolicy: "IfNotPresent"
           args: ["worker"]
           env:            
@@ -479,7 +479,7 @@ spec:
               value: /geoip/GeoLite2-City.mmdb
             - name: AUTHENTIK_LOG_LEVEL
               value: info
-            - name: AUTHENTIK_OUTPOSTS__DOCKER_IMAGE_BASE
+            - name: AUTHENTIK_OUTPOSTS__CONTAINER_IMAGE_BASE
               value: goauthentik.io/%(type)s:%(version)s
             - name: AUTHENTIK_POSTGRESQL__HOST
               value: host
