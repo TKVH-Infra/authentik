@@ -20,6 +20,14 @@ spec:
             name: authentik
             port:
               number: 80
+      - path: /akprox
+        pathType: Prefix
+        backend:
+          service:
+            name: ak-outpost-authentik-embedded-outpost
+            port:
+              number: 9000
+
   tls:
   - hosts:
     - <path:apps-kv/data/authentik/config#HOST>
