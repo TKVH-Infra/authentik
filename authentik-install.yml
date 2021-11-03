@@ -5,7 +5,7 @@ kind: ServiceAccount
 automountServiceAccountToken: true
 metadata:
   name: authentik-redis
-  namespace: "authentik"
+  namespace: "vault"
   labels:
     app.kubernetes.io/name: redis
     helm.sh/chart: redis-15.3.2
@@ -17,14 +17,14 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: authentik
-  namespace: authentik
+  namespace: vault
 ---
 # Source: authentik/charts/redis/templates/configmap.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: authentik-redis-configuration
-  namespace: "authentik"
+  namespace: "vault"
   labels:
     app.kubernetes.io/name: redis
     helm.sh/chart: redis-15.3.2
@@ -57,7 +57,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: authentik-redis-health
-  namespace: "authentik"
+  namespace: "vault"
   labels:
     app.kubernetes.io/name: redis
     helm.sh/chart: redis-15.3.2
@@ -146,7 +146,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: authentik-redis-scripts
-  namespace: "authentik"
+  namespace: "vault"
   labels:
     app.kubernetes.io/name: redis
     helm.sh/chart: redis-15.3.2
@@ -248,14 +248,14 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: authentik
-    namespace: authentik
+    namespace: vault
 ---
 # Source: authentik/charts/redis/templates/headless-svc.yaml
 apiVersion: v1
 kind: Service
 metadata:
   name: authentik-redis-headless
-  namespace: "authentik"
+  namespace: "vault"
   labels:
     app.kubernetes.io/name: redis
     helm.sh/chart: redis-15.3.2
@@ -277,7 +277,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: authentik-redis-master
-  namespace: "authentik"
+  namespace: "vault"
   labels:
     app.kubernetes.io/name: redis
     helm.sh/chart: redis-15.3.2
@@ -509,7 +509,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: authentik-redis-master
-  namespace: "authentik"
+  namespace: "vault"
   labels:
     app.kubernetes.io/name: redis
     helm.sh/chart: redis-15.3.2
@@ -536,9 +536,9 @@ spec:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/component: master
       annotations:
-        checksum/configmap: ab87ffcd87e1a491502db01d8da517a9c3a1690786a84875ecbe336e2be8ea01
-        checksum/health: 7309b436fcf5af0a5036c7bef39024417dba399441ae6b1fcd3bd6a9c56dffa8
-        checksum/scripts: 29ee55054d68e047126b9c5bc9813d2c72d4cb6fa561fdf7d3c8ecd05b7da70a
+        checksum/configmap: 8929d6e2d4f8ca7fce60b3500dc751bcfca7b38b05466ab0665d4e954635bdd6
+        checksum/health: c3058ead4c50bfca00d85ce290c382f301c686a8d4ff233a7452833adfd497c9
+        checksum/scripts: 021f4dc7b0a82e1013a47973225545fab4d60fba10db29ee5f38af68dd4ec096
         checksum/secret: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
     spec:
       
@@ -557,7 +557,7 @@ spec:
                     app.kubernetes.io/instance: authentik
                     app.kubernetes.io/component: master
                 namespaces:
-                  - "authentik"
+                  - "vault"
                 topologyKey: kubernetes.io/hostname
               weight: 1
         nodeAffinity:
