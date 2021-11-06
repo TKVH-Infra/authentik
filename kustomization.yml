@@ -5,6 +5,7 @@ resources:
   - authentik-install.yml
   - authentik-spc.yml
   - authentik-pvc.yml
+  - authentik-ns.yml
   - psql-deploy.yml
   - psql-svc.yml
   - authentik-ing.yml
