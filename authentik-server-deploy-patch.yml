@@ -90,7 +90,7 @@ spec:
             limits:
               memory: 512Mi
             requests:
-              memory: 256Mi
+              memory: 400Mi
       volumes:
       - name: authentik-secrets
         csi:

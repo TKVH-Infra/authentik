@@ -21,6 +21,6 @@ spec:
        - name: redis
          resources:
            limits:
-             memory: 64Mi
+             memory: 128Mi
            requests:
-             memory: 32Mi
+             memory: 64Mi
