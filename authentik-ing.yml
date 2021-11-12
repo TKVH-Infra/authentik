@@ -10,7 +10,7 @@ metadata:
     kubernetes.io/ingress.class: "nginx"
 spec:
   rules:
-  - host: <path:apps-kv/data/authentik/config#HOST>
+  - host: auth.<path:apps-kv/data/general#DN>
     http:
       paths:
       - path: /
@@ -22,4 +22,4 @@ spec:
               number: 80
   tls:
   - hosts:
-    - <path:apps-kv/data/authentik/config#HOST>
+    - auth.<path:apps-kv/data/general#DN>
