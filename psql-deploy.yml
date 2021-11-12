@@ -57,9 +57,9 @@ spec:
           readOnly: true
         resources:
           limits:
-            memory: 128Mi
+            memory: 150Mi
           requests:
-            memory: 64Mi
+            memory: 100Mi
       volumes:
       - name: authentik-psql
         persistentVolumeClaim:
