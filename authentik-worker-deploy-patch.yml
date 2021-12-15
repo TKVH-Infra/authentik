@@ -7,6 +7,16 @@ metadata:
 spec:
   template:
     spec:
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            preference:
+              matchExpressions:
+              - key: disktype
+                operator: In
+                values:
+                - ssd
       containers:
         - name: authentik
           env:
@@ -84,9 +94,9 @@ spec:
               value: "2Gi"
           resources:
             limits:
-              memory: 512Mi
+              memory: 1Gi
             requests:
-              memory: 400Mi
+              memory: 900Mi
           volumeMounts:
             - name: authentik-secrets
               mountPath: "/mnt/vault"
