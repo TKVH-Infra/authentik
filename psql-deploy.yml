@@ -22,6 +22,16 @@ spec:
         app: psql
         part-of: authentik
     spec:
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            preference:
+              matchExpressions:
+              - key: disktype
+                operator: In
+                values:
+                - ssd
       serviceAccountName: authentik
       containers:
       - name: psql
