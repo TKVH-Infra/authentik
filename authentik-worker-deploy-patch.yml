@@ -94,9 +94,9 @@ spec:
               value: "2Gi"
           resources:
             limits:
-              memory: 400Mi
+              memory: 500Mi
             requests:
-              memory: 300Mi
+              memory: 400Mi
           volumeMounts:
             - name: authentik-secrets
               mountPath: "/mnt/vault"
