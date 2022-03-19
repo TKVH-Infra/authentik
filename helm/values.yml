@@ -16,3 +16,6 @@ postgresql:
   enabled: false
 redis:
   enabled: true
+image:
+  repository: ghcr.io/goauthentik/server
+  tag: 2022.3.2

@@ -349,14 +349,14 @@ spec:
         app.kubernetes.io/name: authentik
         app.kubernetes.io/instance: authentik
         app.kubernetes.io/component: "server"
-        app.kubernetes.io/version: "2022.3.1"
+        app.kubernetes.io/version: "2022.3.2"
     spec:
       serviceAccountName: authentik
       enableServiceLinks: true
       priorityClassName: 
       containers:
         - name: authentik
-          image: "ghcr.io/goauthentik/server:2022.3.1"
+          image: "ghcr.io/goauthentik/server:2022.3.2"
           imagePullPolicy: "IfNotPresent"
           args: ["server"]
           env:            
@@ -452,14 +452,14 @@ spec:
         app.kubernetes.io/name: authentik
         app.kubernetes.io/instance: authentik
         app.kubernetes.io/component: "worker"
-        app.kubernetes.io/version: "2022.3.1"
+        app.kubernetes.io/version: "2022.3.2"
     spec:
       serviceAccountName: authentik
       enableServiceLinks: true
       priorityClassName: 
       containers:
         - name: authentik
-          image: "ghcr.io/goauthentik/server:2022.3.1"
+          image: "ghcr.io/goauthentik/server:2022.3.2"
           imagePullPolicy: "IfNotPresent"
           args: ["worker"]
           env:            
