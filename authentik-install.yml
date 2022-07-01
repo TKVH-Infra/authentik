@@ -8,7 +8,7 @@ metadata:
   namespace: "authentik"
   labels:
     app.kubernetes.io/name: redis
-    helm.sh/chart: redis-15.3.2
+    helm.sh/chart: redis-15.7.6
     app.kubernetes.io/instance: authentik
     app.kubernetes.io/managed-by: Helm
 ---
@@ -27,7 +27,7 @@ metadata:
   namespace: "authentik"
   labels:
     app.kubernetes.io/name: redis
-    helm.sh/chart: redis-15.3.2
+    helm.sh/chart: redis-15.7.6
     app.kubernetes.io/instance: authentik
     app.kubernetes.io/managed-by: Helm
 data:
@@ -60,7 +60,7 @@ metadata:
   namespace: "authentik"
   labels:
     app.kubernetes.io/name: redis
-    helm.sh/chart: redis-15.3.2
+    helm.sh/chart: redis-15.7.6
     app.kubernetes.io/instance: authentik
     app.kubernetes.io/managed-by: Helm
 data:
@@ -149,7 +149,7 @@ metadata:
   namespace: "authentik"
   labels:
     app.kubernetes.io/name: redis
-    helm.sh/chart: redis-15.3.2
+    helm.sh/chart: redis-15.7.6
     app.kubernetes.io/instance: authentik
     app.kubernetes.io/managed-by: Helm
 data:
@@ -258,7 +258,7 @@ metadata:
   namespace: "authentik"
   labels:
     app.kubernetes.io/name: redis
-    helm.sh/chart: redis-15.3.2
+    helm.sh/chart: redis-15.7.6
     app.kubernetes.io/instance: authentik
     app.kubernetes.io/managed-by: Helm
 spec:
@@ -280,7 +280,7 @@ metadata:
   namespace: "authentik"
   labels:
     app.kubernetes.io/name: redis
-    helm.sh/chart: redis-15.3.2
+    helm.sh/chart: redis-15.7.6
     app.kubernetes.io/instance: authentik
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: master
@@ -303,10 +303,10 @@ kind: Service
 metadata:
   name: authentik
   labels:
-    helm.sh/chart: authentik-2022.3.1
+    helm.sh/chart: authentik-2022.6.3
     app.kubernetes.io/name: authentik
     app.kubernetes.io/instance: authentik
-    app.kubernetes.io/version: "2022.3.1"
+    app.kubernetes.io/version: "2022.6.3"
     app.kubernetes.io/managed-by: Helm
 spec:
   type: ClusterIP
@@ -330,10 +330,10 @@ kind: Deployment
 metadata:
   name: authentik-server
   labels:
-    helm.sh/chart: authentik-2022.3.1
+    helm.sh/chart: authentik-2022.6.3
     app.kubernetes.io/name: authentik
     app.kubernetes.io/instance: authentik
-    app.kubernetes.io/version: "2022.3.1"
+    app.kubernetes.io/version: "2022.6.3"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: "server"
 spec:
@@ -349,14 +349,16 @@ spec:
         app.kubernetes.io/name: authentik
         app.kubernetes.io/instance: authentik
         app.kubernetes.io/component: "server"
-        app.kubernetes.io/version: "2022.3.2"
+        app.kubernetes.io/version: "2022.6.3"
     spec:
       serviceAccountName: authentik
       enableServiceLinks: true
       priorityClassName: 
+      securityContext:
+        {}
       containers:
         - name: authentik
-          image: "ghcr.io/goauthentik/server:2022.3.2"
+          image: "ghcr.io/goauthentik/server:2022.6.3"
           imagePullPolicy: "IfNotPresent"
           args: ["server"]
           env:            
@@ -433,10 +435,10 @@ kind: Deployment
 metadata:
   name: authentik-worker
   labels:
-    helm.sh/chart: authentik-2022.3.1
+    helm.sh/chart: authentik-2022.6.3
     app.kubernetes.io/name: authentik
     app.kubernetes.io/instance: authentik
-    app.kubernetes.io/version: "2022.3.1"
+    app.kubernetes.io/version: "2022.6.3"
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: "worker"
 spec:
@@ -452,14 +454,16 @@ spec:
         app.kubernetes.io/name: authentik
         app.kubernetes.io/instance: authentik
         app.kubernetes.io/component: "worker"
-        app.kubernetes.io/version: "2022.3.2"
+        app.kubernetes.io/version: "2022.6.3"
     spec:
       serviceAccountName: authentik
       enableServiceLinks: true
       priorityClassName: 
+      securityContext:
+        {}
       containers:
         - name: authentik
-          image: "ghcr.io/goauthentik/server:2022.3.2"
+          image: "ghcr.io/goauthentik/server:2022.6.3"
           imagePullPolicy: "IfNotPresent"
           args: ["worker"]
           env:            
@@ -516,7 +520,7 @@ metadata:
   namespace: "authentik"
   labels:
     app.kubernetes.io/name: redis
-    helm.sh/chart: redis-15.3.2
+    helm.sh/chart: redis-15.7.6
     app.kubernetes.io/instance: authentik
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: master
@@ -535,14 +539,14 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: redis
-        helm.sh/chart: redis-15.3.2
+        helm.sh/chart: redis-15.7.6
         app.kubernetes.io/instance: authentik
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/component: master
       annotations:
-        checksum/configmap: ab87ffcd87e1a491502db01d8da517a9c3a1690786a84875ecbe336e2be8ea01
-        checksum/health: 7309b436fcf5af0a5036c7bef39024417dba399441ae6b1fcd3bd6a9c56dffa8
-        checksum/scripts: 29ee55054d68e047126b9c5bc9813d2c72d4cb6fa561fdf7d3c8ecd05b7da70a
+        checksum/configmap: 27644827c04a13bace860bf20465b6f922d49f69b7fc857ec4af175779bdc9f1
+        checksum/health: c9fa10bf90885035fbbb0f3db9ec0a7a819eac5fd6d24bb8bfb6964afcc25d60
+        checksum/scripts: a7577573d6e451c289421a42bbc486c47c3b0aff44ebaedd10a381e63c9a310e
         checksum/secret: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
     spec:
       
@@ -569,7 +573,7 @@ spec:
       terminationGracePeriodSeconds: 30
       containers:
         - name: redis
-          image: docker.io/bitnami/redis:6.2.5-debian-10-r34
+          image: docker.io/bitnami/redis:6.2.6-debian-10-r97
           imagePullPolicy: "IfNotPresent"
           securityContext:
             runAsUser: 1001

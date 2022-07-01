@@ -98,9 +98,9 @@ spec:
               readOnly: true
           resources:
             limits:
-              memory: 500Mi
+              memory: 700Mi
             requests:
-              memory: 400Mi
+              memory: 600Mi
       volumes:
       - name: authentik-secrets
         csi:
