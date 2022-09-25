@@ -18,4 +18,4 @@ redis:
   enabled: true
 image:
   repository: ghcr.io/goauthentik/server
-  tag: 2022.9.1
+  tag: 2022.9
